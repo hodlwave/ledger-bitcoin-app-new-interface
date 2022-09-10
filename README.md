@@ -88,7 +88,7 @@ python3 ledger.py --network testnet receive \
   --key-expression "[358977ae/48'/1'/0'/2']tpubDEkgaW2Z2LMF8VZ58iNjWZ7qizZ6DXsKMQecQQXrdbwdojST74xpLy2jHS7ZKcMieJWXFNphfHvWh5tYJ8C62XwqsNT5pAEQAV5xXiDVRXU/**" \
   --change 0 \
   --index 0 \
-  --policy_hmac "7824b8740c2aa9bf18c57b11d6bf9ee3dce48d26ec8c133e672b5599a4b60cfb"
+  --policy-hmac "7824b8740c2aa9bf18c57b11d6bf9ee3dce48d26ec8c133e672b5599a4b60cfb"
 ```
 
 The following address should be displayed on-screen and in the terminal after approving it:
@@ -117,7 +117,7 @@ python3 ledger.py --network testnet sign \
   --key-expression "[358977ae/48'/1'/0'/2']tpubDEkgaW2Z2LMF8VZ58iNjWZ7qizZ6DXsKMQecQQXrdbwdojST74xpLy2jHS7ZKcMieJWXFNphfHvWh5tYJ8C62XwqsNT5pAEQAV5xXiDVRXU/**" \
   --change 0 \
   --index 0 \
-  --policy_hmac "7824b8740c2aa9bf18c57b11d6bf9ee3dce48d26ec8c133e672b5599a4b60cfb" \
+  --policy-hmac "7824b8740c2aa9bf18c57b11d6bf9ee3dce48d26ec8c133e672b5599a4b60cfb" \
   --psbt-file ledger-testing-send-to-faucet.psbt
 ```
 

@@ -70,9 +70,8 @@ def add_additional_arguments(parser):
                           help="Change flag",
                           choices={0, 1}, required=True)
     parser.add_argument("-i", "--index", type=int,
-                          help="Address index",
-                          choices={0, 1}, required=True)
-    parser.add_argument("--policy_hmac", type=str,
+                          help="Address index", required=True)
+    parser.add_argument("--policy-hmac", type=str,
                           help="Policy hmac", required=True)
 
 # --------------------------------------------------------------
