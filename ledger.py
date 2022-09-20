@@ -46,7 +46,12 @@ def add_receive_command(subparsers):
         help="View a receive address on the Ledger device"
     )
     add_base_arguments(parser)
-    add_additional_arguments(parser)
+    add_hmac_argument(parser)
+    parser.add_argument("-c", "--change", type=int,
+                        help="Change flag",
+                        choices={0, 1}, required=True)
+    parser.add_argument("-i", "--index", type=int,
+                        help="Address index", required=True)
 
 def add_sign_command(subparsers):
     parser = subparsers.add_parser(
@@ -54,25 +59,20 @@ def add_sign_command(subparsers):
         help="Sign a PSBT on the Ledger device"
     )
     add_base_arguments(parser)
-    add_additional_arguments(parser)
+    add_hmac_argument(parser)
     parser.add_argument('--psbt-file', type=argparse.FileType('r'))
 
 def add_base_arguments(parser):
     parser.add_argument("-w", "--wallet", type=str,
-                          help="Wallet name", required=True)
+                        help="Wallet name", required=True)
     parser.add_argument("-m", "--threshold", type=int,
-                          help="Signing threshold", required=True)
+                        help="Signing threshold", required=True)
     parser.add_argument('-k', '--key-expression', action='append', type=str,
-                          help='Key expressions (specify N)', required=True)
+                        help='Key expressions (specify N)', required=True)
 
-def add_additional_arguments(parser):
-    parser.add_argument("-c", "--change", type=int,
-                          help="Change flag",
-                          choices={0, 1}, required=True)
-    parser.add_argument("-i", "--index", type=int,
-                          help="Address index", required=True)
+def add_hmac_argument(parser):
     parser.add_argument("--policy-hmac", type=str,
-                          help="Policy hmac", required=True)
+                        help="Policy hmac", required=True)
 
 # --------------------------------------------------------------
 # Programs
@@ -101,8 +101,7 @@ def receive(client, wallet_name, threshold, key_expressions, change, index, poli
     print(f"Receive address: { addr }")
 
 
-def sign(client, wallet_name, threshold, key_expressions,
-         change, index, policy_hmac, psbt_file):
+def sign(client, wallet_name, threshold, key_expressions, policy_hmac, psbt_file):
     print(policy_hmac)
     multisig_policy = MultisigWallet(
         name=wallet_name,
@@ -138,7 +137,7 @@ def main():
                 args.change, args.index, args.policy_hmac)
     if args.program == "sign":
         sign(client, args.wallet, args.threshold, args.key_expression,
-             args.change, args.index, args.policy_hmac, args.psbt_file)
+             args.policy_hmac, args.psbt_file)
 
 if __name__ == "__main__":
     main()
